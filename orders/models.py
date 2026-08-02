@@ -3,20 +3,26 @@ from django.conf import settings
 
 # Create your models here.
 
-class StatusChoices(models.TextChoices):
-    pending = 'pending', 'Chờ duyệt'
-    approved = 'approved', 'Đã duyệt'
-    cancelled = 'cancelled' 'Đã hủy'
-    delivery = 'delivery', 'Đang giao'
-    delivered = 'delivered', 'Đã nhận'
 
 class Order(models.Model):
+    class StatusChoices(models.TextChoices):
+        PENDING = 'pending', 'Chờ duyệt'
+        APPROVED = 'approved', 'Đã duyệt'
+        CANCELLED = 'cancelled' 'Đã hủy'
+        DELIVERY = 'delivery', 'Đang giao'
+        DELIVERED = 'delivered', 'Đã nhận'
+        
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     email = models.EmailField(unique=False, blank=False)
     phone = models.CharField(max_length=15, blank=False)
     address = models.TextField(max_length=500, blank=False)
+    
     notes = models.TextField(max_length=1000, blank=True)
-    status = models.CharField(max_length=20, choices=StatusChoices.choices, default='pending')
+    status = models.CharField(
+        max_length=20, 
+        choices=StatusChoices.choices, 
+        default=StatusChoices.PENDING)
+    
     created_at = models.DateTimeField(auto_now_add=True)
     
     def total_order(self):

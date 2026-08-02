@@ -1,11 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-# Model Banner (làm giống thầy) 
-# Model Post (làm giống thầy)
-# Trên web thầy có để ví dụ
-
 class Banner(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='banners/')
