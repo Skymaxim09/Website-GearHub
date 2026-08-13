@@ -1,0 +1,25 @@
+.navbar-gearhub {
+    background-color: var(--primary-color);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;
+}
+
+main.container {
+    min-height: calc(100vh - 180px);
+}
+
+.section-white {
+    padding: 30px;
+    border-radius: 10px;
+    background-color: white;
+}
