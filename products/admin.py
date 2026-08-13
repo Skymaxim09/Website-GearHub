@@ -24,17 +24,17 @@ class BaseProductAdmin(admin.ModelAdmin):
 @admin.register(Keyboard)
 class KeyboardAdmin(BaseProductAdmin):
     list_filter = BaseProductAdmin.list_filter + (
-        'layout', 'switch_type', 'connection')
+        'layout', 'keyboard_type', 'connection')
     fieldsets = BaseProductAdmin.fieldsets + (
-        ('Phân loại sản phẩm', {'fields': ('layout', 'switch_type', 'connection')}),
+        ('Phân loại sản phẩm', {'fields': ('layout', 'keyboard_type', 'connection')}),
     )
     
 @admin.register(Switch)
 class SwitchAdmin(BaseProductAdmin):
     list_filter = BaseProductAdmin.list_filter + (
-        's_type',)
+        'switch_type',)
     fieldsets = BaseProductAdmin.fieldsets + (
-        ('Phân loại sản phẩm', {'fields': ('s_type',)}),
+        ('Phân loại sản phẩm', {'fields': ('switch_type',)}),
     )
 
 @admin.register(Keycap)
