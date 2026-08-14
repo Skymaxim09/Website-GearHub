@@ -86,7 +86,7 @@ class Keyboard(Product):
         LAYOUT_75 = 'layout_75', 'Layout 75%'
         FULL_LAYOUT = 'layout_100', 'Layout Fullsize'
         
-    class SwitchType(models.TextChoices):
+    class KeyboardType(models.TextChoices):
         MECH = 'mech', 'Bàn phím cơ'
         HE = 'he', 'Bàn phím HE'
         LOW_PROFILE = 'low_profile', 'Bàn phím Low Profile'
@@ -95,18 +95,18 @@ class Keyboard(Product):
         WIRED = 'wired', 'có dây'
         WIRELESS = 'wireless', 'không dây'
         
-    layout = models.CharField(max_length=15, choices=Layout.choices)
-    switch_type = models.CharField(max_length=20, choices=SwitchType.choices)
-    connection = models.CharField(max_length=15, choices=Connection.choices)
+    layout = models.CharField(max_length=15, choices=Layout.choices, verbose_name="Layout")
+    keyboard_type = models.CharField(max_length=20, choices=KeyboardType.choices, verbose_name="Loại bàn phím")
+    connection = models.CharField(max_length=15, choices=Connection.choices, verbose_name="Kiểu kết nối")
 
 class Switch(Product):
-    class SType(models.TextChoices):
+    class SwitchType(models.TextChoices):
         LINEAR = 'linear', 'Linear'
         TACTILE = 'tactile', 'Tactile'
         SLIENT = 'slient', 'Slient'
         HE = 'he', 'HE'
         
-    s_type = models.CharField(max_length=15, choices=SType.choices)
+    switch_type = models.CharField(max_length=15, choices=SwitchType.choices, verbose_name="Loại switch")
 
 class Keycap(Product):
     class Profile(models.TextChoices):
@@ -123,9 +123,9 @@ class Keycap(Product):
         DOUBLE_SHOT = 'double_shot', 'Doubleshot'
         DYE_SUB = 'dye_sub', 'Dyesub'
         
-    profile = models.CharField(max_length=10, choices=Profile.choices)
-    material = models.CharField(max_length=5, choices=Material.choices)
-    print_tech = models.CharField(max_length=15, choices=PrintTech.choices)
+    profile = models.CharField(max_length=10, choices=Profile.choices, verbose_name="Profile")
+    material = models.CharField(max_length=5, choices=Material.choices, verbose_name="Chất liệu")
+    print_tech = models.CharField(max_length=15, choices=PrintTech.choices, verbose_name="Công nghệ in")
 
 class Mouse(Product):
     class Connection(models.TextChoices):
@@ -142,9 +142,9 @@ class Mouse(Product):
         OFFICE = 'office', 'Văn phòng' 
         GAMMING = 'gamming' 'Gamming'
         
-    connection = models.CharField(max_length=15, choices=Connection.choices)
-    brand = models.CharField(max_length=15, choices=Brand.choices)
-    mouse_type = models.CharField(max_length=15, choices=MouseType.choices)
+    connection = models.CharField(max_length=15, choices=Connection.choices, verbose_name="Kiểu kết nối")
+    brand = models.CharField(max_length=15, choices=Brand.choices, verbose_name="Thương hiệu")
+    mouse_type = models.CharField(max_length=15, choices=MouseType.choices, verbose_name="Thể loại")
 
 class ModTool(Product):
     class MTType(models.TextChoices):
@@ -152,5 +152,5 @@ class ModTool(Product):
         LUBE = 'lube', 'Mỡ lube'
         MODDING = 'modding', 'Vật liệu mod'
         
-    mt_type = models.CharField(max_length=20, choices=MTType.choices)
+    mt_type = models.CharField(max_length=20, choices=MTType.choices, verbose_name="Thể loại")
     
