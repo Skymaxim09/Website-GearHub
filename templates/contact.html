@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load humanize %}
+
+{% block title %}GearHub - Liên hệ{% endblock %}
+
+{% block content %}
+<section class="contact-wrapper">
+    <div class="text-center mb-5">
+        <h2 class="section-title">Biễu mẫu liên hệ</h2>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <form action="" class="contact-form" method="post">
+                {% csrf_token %}
+
+                <div class="form-group mb-3">
+                    <label for="" class="form-label">Label Title</label>
+                    
+                    <ul class="error-list">
+                        <li>error</li>
+                    </ul>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="" class="form-label">Label Title</label>
+                    
+                    <ul class="error-list">
+                        <li>error</li>
+                    </ul>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="" class="form-label">Label Title</label>
+                    
+                    <ul class="error-list">
+                        <li>error</li>  
+                    </ul>
+                    
+                    <span class="form-text">Hãy sử dụng ngôn từ phù hợp</span>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn-submit">
+                        Gửi liên hệ
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

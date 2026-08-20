@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load humanize %}
+
+{% block title %}GearHub - Tin tức{% endblock %}
+
+{% block content %}
+<section>
+    <div class="text-center mb-5">
+        <h2 class="section-title">
+            Tất cả các tin tức
+        </h2>
+    </div>
+
+    <div class="row g-4">
+        
+        <!-- Post card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="post-card">
+                <div class="post-img-wrapper">
+                    <a href="{% url 'post_detail' 1 %}" class="post-img">
+                        <img src="{% static 'image/banner 1.png' %}" alt="Post title">
+                    </a>
+                </div>
+
+                <div class="post-body">
+                    <h3 class="post-title">Post Title</h3>
+                    <p class="post-content">Post Content</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

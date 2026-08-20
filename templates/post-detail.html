@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load humanize %}
+
+{% block title %}GearHub - Tin tức chi tiết{% endblock %}
+
+{% block content %}
+<section class="post-detail-wrapper">
+    <div class="post-detail-img mb-4">
+        <img src="{% static 'image/banner 1.png' %}" alt="Post Title" class="post-img">
+    </div>
+
+    <div class="post-detail-title text-center mb-3">
+        <h2 class="post-title">Tiêu đề bài viết</h2>
+    </div>
+
+    <div class="post-meta text-center">
+        <!-- Ngày tháng năm của tin tức -->
+    </div>
+
+    <div class="post-detail-content">
+        <div class="post-content">
+            <!-- Lấy content của tin tức và thêm linebreaks -->
+        </div>
+    </div>
+</section>
+{% endblock %}
