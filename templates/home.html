@@ -1,71 +1,113 @@
-<!doctype html>
-<html lang="vi">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GearHub - Home (Template)</title>
-  <link rel="stylesheet" href="../static/css/main.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="logo">GearHub</div>
-      <nav class="main-nav">
-        <input type="text" placeholder="Nhập tên sản phẩm..." class="search-input">
-        <div class="auth-links">
-          <a href="#">Sign in</a>
-          <a href="#">Sign up</a>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load humanize %}
+
+{% block title %}GearHub Trang Chủ{% endblock %}
+
+{% block content %}
+<section class="hero-banner">
+    {% if banners %}
+    <div id="heroBannerCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-indicators">
+            {% for banner in banners %}
+                <button type="button" data-bs-target="#heroBannerCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                    class="{% if forloop.first %}active{% endif %}" aria-current="{% if forloop.first %}true{% endif %}"
+                    aria-label="Slide {{ forloop.counter }}">
+                </button>
+            {% endfor %}
         </div>
-      </nav>
-    </div>
-  </header>
 
-  <section class="banner">
-    <div class="banner-image" role="img" aria-label="Banner image">
-      <div class="banner-overlay container">
-        <h1>Banner</h1>
-        <p>Hiển thị hình ảnh kèm content trên ảnh</p>
-      </div>
-    </div>
-  </section>
+        <div class="carousel-inner">
+            {% for banner in banners %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="carousel-banner-item" style="background-image: url('{{ banner.image.url }}');">
+                        {% if banner.title %}
+                        <div class="carousel-banner-overlay"></div>
 
-  <main class="container main-content">
-    <section class="section categories">
-      <h2 class="section-title">Section title</h2>
-      <div class="category-list">
-        <div class="category-item"> <div class="icon">Icon</div> <div class="label">Category 1</div></div>
-        <div class="category-item"> <div class="icon">Icon</div> <div class="label">Category 2</div></div>
-        <div class="category-item"> <div class="icon">Icon</div> <div class="label">Category 3</div></div>
-        <div class="category-item"> <div class="icon">Icon</div> <div class="label">Category 4</div></div>
-      </div>
-
-      <div class="featured-products">
-        <h3>Các Sản phẩm nổi bật</h3>
-        <div class="products-grid">
-          <article class="product-card"> <div class="product-image"></div> <h4>Product 1</h4> <p class="price">$99.00</p> </article>
-          <article class="product-card"> <div class="product-image"></div> <h4>Product 2</h4> <p class="price">$149.00</p> </article>
-          <article class="product-card"> <div class="product-image"></div> <h4>Product 3</h4> <p class="price">$79.00</p> </article>
-          <article class="product-card"> <div class="product-image"></div> <h4>Product 4</h4> <p class="price">$129.00</p> </article>
+                        <div class="carousel-caption">
+                            <h1>{{ banner.title }}</h1>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-      </div>
-    </section>
 
-    <section class="section news">  
-      <h2 class="section-title">Section Title</h2>
-      <p>Hiển thị tin tức mới nhất</p>
-      <div class="news-list">
-        <article class="news-item"><h4>Tin tức 1</h4><p>Trích dẫn ngắn của tin tức 1...</p></article>
-        <article class="news-item"><h4>Tin tức 2</h4><p>Trích dẫn ngắn của tin tức 2...</p></article>
-        <article class="news-item"><h4>Tin tức 3</h4><p>Trích dẫn ngắn của tin tức 3...</p></article>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2026 GearHub - Chuyên hỗ trợ về phụ kiện máy tính. Designed by SkyMaxim, Tuấn Tú</p>
-      <a class="contact-btn" href="#">Liên hệ với chúng tôi</a>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroBannerCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Trước</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroBannerCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Sau</span>
+        </button>
     </div>
-  </footer>
-</body>
-</html>
+    {% else %}
+    <div class="banner p-5 text-center text-white">
+        <h1>Chào mừng đến với GearHub</h1>
+    </div>
+    {% endif %}
+</section>
+
+<section class="py-5">
+    <div class="text-center mb-5">
+        <h2 class="section-title">Những sản phẩm nổi bật</h2>
+    </div>
+    
+    <div class="category-filter">
+        {% for cate in categories %}
+            <a href="{% url 'home' cate.slug %}" class="filter-btn {% if cate.slug == current_slug %}active{% endif %}">
+                {{ cate.name }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="row g-4">
+        {% for product in featured_products %}
+        <div class="col-md-6 col-lg-3">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <a href="#" class="product-img">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </a>
+                </div>
+
+                <div class="product-body">
+                    <h3 class="product-name">{{ product.name }}</h3>
+                    <p class="product-price">{{ product.price|intcomma }} vnđ</p>
+                    <button class="btn-full-primary">Thêm vào giỏ hàng</button>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="text-center mb-5">
+        <h2 class="section-title">Tin tức mới nhất</h2>
+    </div>
+    
+    <div class="row g-4">
+        {% for post in posts %}
+        <div class="col-md-6 col-lg-3">
+            <div class="post-card">
+                <div class="post-img-wrapper">
+                    <a href="{% url 'post_detail' post.id %}" class="post-img">
+                        <img src="{{ post.image.url|default:'' }}" alt="{{ post.title }}">
+                    </a>
+                </div>
+
+                <div class="post-body">
+                    <h3 class="post-title">{{ post.title }}</h3>
+                    <p class="post-content">{{ post.content }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
