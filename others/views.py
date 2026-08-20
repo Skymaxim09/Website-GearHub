@@ -31,9 +31,6 @@ def post_detail(request, pk):
     return render(request, 'post-detail.html', {'post': post})
 
 def contact_view(request):
-    bad_words = ['ăn cắp', 'tuồn kho', 'lừa đảo', 'hack', 'scam', 'fake', 'hàng giả']
-    success = False
-
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -45,4 +42,4 @@ def contact_view(request):
     else:
         form = ContactForm()
 
-    return render(request, 'contact.html', {'form': form, 'success': success})
+    return render(request, 'contact.html', {'form': form})

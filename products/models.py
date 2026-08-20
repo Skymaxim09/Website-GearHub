@@ -47,7 +47,7 @@ class Product(models.Model):
         if self.pk:
             featured_query = featured_query.exclude(pk=self.pk)
         
-        if featured_query >= 4:
+        if featured_query.count() >= 4:
             raise ValidationError(
                 'Chỉ tối đa 4 sản phẩm nổi bật mỗi danh mục sản phẩm'
             )
