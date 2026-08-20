@@ -1,0 +1,55 @@
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(107, 73, 50, 0.1);
+}
+
+.form-label {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.form-text {
+    display: block;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+}
+
+.error-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 6px;
+}
+
+.error-list li {
+    background: #fee2e2;
+    color: var(--danger-color);
+    padding: 6px 14px;
+    border-radius: 6px;
+    border-left: 4px solid var(--danger-color);
+    font-size: 0.9rem;
+}
+
+/* Contact form */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
