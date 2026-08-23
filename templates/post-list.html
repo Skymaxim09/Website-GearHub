@@ -17,20 +17,28 @@
     <div class="row g-4">
         
         <!-- Post card -->
+        {% for post in posts %}
         <div class="col-md-6 col-lg-3">
             <div class="post-card">
                 <div class="post-img-wrapper">
-                    <a href="{% url 'post_detail' 1 %}" class="post-img">
-                        <img src="{% static 'image/banner 1.png' %}" alt="Post title">
+                    <a href="{% url 'post_detail' post.id %}" class="post-img">
+                        {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                        {% else %}
+                        <img src="{% static 'image/banner 1.png' %}" alt="{{ post.title }}">
+                        {% endif %}
                     </a>
                 </div>
 
                 <div class="post-body">
-                    <h3 class="post-title">Post Title</h3>
-                    <p class="post-content">Post Content</p>
+                    <h3 class="post-title">{{ post.title }}</h3>
+                    <p class="post-content">{{ post.content }}</p>
                 </div>
             </div>
         </div>
+        {% empty %}
+        <p>Không có bài viết nào.</p>
+        {% endfor %}
 
     </div>
 </section>
