@@ -35,3 +35,19 @@ function antiDoubleSubmit() {
 
 antiDoubleSubmit();
 document.addEventListener('DOMContentLoaded', hoverDropDown);
+
+// Change category slug (product list)
+document.addEventListener('DOMContentLoaded', function() {
+    const categorySelect = document.getElementById('categorySelect');
+    if (categorySelect) {
+        categorySelect.addEventListener('change', function() {
+            const slug = this.value;
+            if (slug) {
+                const pathOrigin = window.location.origin;
+                const pathUrl = '/product-list--slug_placeholder'.replace('slug_placeholder', slug)
+
+                window.location.replace(pathOrigin + pathUrl);
+            }
+        });
+    }
+});
