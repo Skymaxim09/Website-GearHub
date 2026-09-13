@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load humanize %}
+
+{% block title %}GearHub - Chi tiết sản phẩm{% endblock %}
+
+{% block content %}
+<!-- Image and Information product  -->
+<!-- Related products -->
+<section class="py-4">
+    <div class="section-white product-detail-wrapper">
+        <div class="text-center mb-3">
+            <h2 class="section-title">Chi tiết sản phẩm</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 product-image-col">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            </div>
+
+            <div class="col-md-6 product-info-col">
+                <div class="product-meta">
+                    <div class="product-status status-{{ product.status }}">
+                        {{ product.get_status_display }}
+                    </div>
+
+                    <h1 class="product-name">{{ product.name }}</h1>
+
+                    <div class="product-description">
+                        {{ product.description }}
+                    </div>
+
+                    <p class="product-price">{{ product.price|intcomma }} vnđ</p>
+
+                    <div class="product-quantity">
+                        <i class="fas fa-boxes"></i>
+                        Số lượng: <strong>{{ product.quantity }}</strong>
+                    </div>
+                </div>
+
+                <button class="btn-add-to-cart">
+                    <i class="fas fa-cart-plus me-2"></i>
+                    Thêm vào giỏ hàng
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-white related-products py-4">
+    <div class="text-center mb-5">
+        <h2 class="section-title">Các sản phẩm liên quan</h2>
+    </div>
+
+    <div class="row g-4">
+        {% for related_p in related_products %}
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <a href="#" class="product-img">
+                        <img src="{{ related_p.image.url }}" alt="{{ related_p.name }}">
+                    </a>
+                </div>
+        
+                <div class="product-body">
+                    <h3 class="product-name">{{ related_p.name }}</h3>
+                    <p class="product-price">{{ related_p.price|intcomma }} vnđ</p>
+                    <button class="btn-full-primary">Thêm vào giỏ hàng</button>
+                </div>
+        
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

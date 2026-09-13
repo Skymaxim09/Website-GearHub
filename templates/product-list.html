@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load humanize %}
+
+{% block title %}GearHub - Trang sản phẩm{% endblock %}
+
+{% block content %}
+<!-- Filter -->
+<!-- Product list -->
+<section class="product-list-wrapper py-5">
+    <div class="text-center mb-5">
+        <h2 class="section-title">Trang sản phẩm</h2>
+    </div>
+
+    <div class="filter-wrapper mb-4">
+        <form method="get" class="filter-form row g-3 align-items-end">
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label for="categorySelect" class="form-label">Danh mục:</label>
+                    <select name="category" id="categorySelect" class="form-select">
+                        <option value="" disabled selected hidden>-- Chọn danh mục --</option>
+                        {% for cate in categories %}
+                        <option value="{{ cate.slug }}" {% if cate.slug == current_cate.slug %}selected{% endif %}>
+                            {{ cate.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            {% for f in filter_meta %}
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label for="filter_{{ f.name }}" class="form-label">
+                        {{ f.verbose_name }}
+                    </label>
+                    <select name="{{ f.name }}" id="filter_{{ f.name }}" class="form-select">
+                        <option value="">Tất cả</option>
+                        {% for choice_value, choice_label in f.choices %}
+                        <option value="{{ choice_value }}" {% if choice_value|stringformat:"s" == f.current_value|stringformat:"s" %}selected{% endif %}>
+                            {{ choice_label }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% if current_cate.slug %}
+            <div class="col-md-3 col-sm-6 d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-filter me-1"></i> Lọc
+                </button>
+                <a href="{% url 'product_list' current_cate.slug %}" class="btn btn-outline-danger w-100">
+                    <i class="fas fa-undo me-1"></i> Xóa
+                </a>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+
+    {% if products.count > 0 %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Tìm thấy <strong>{{ products|length }}</strong> sản phẩm</span>
+    </div>
+    {% else %}
+    <div class="text-center mb-3">
+        <span class="text-muted"><strong>Không tìm thấy bất kỳ sản phẩm nào</strong></span>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <span class="product-status-badge status-{{ product.status }}">
+                        {{ product.get_status_display }}
+                    </span>
+                    
+                    <a href="#" class="product-img">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </a>
+                </div>
+        
+                <div class="product-body">
+                    <h3 class="product-name">{{ product.name }}</h3>
+                    <p class="product-price">{{ product.price|intcomma }} vnđ</p>
+                    <button class="btn-full-primary">Thêm vào giỏ hàng</button>
+                </div>
+        
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- <section class="section-white py-5">
+    <div class="text-center mb-5">
+        <h2 class="section-title">Các sản phẩm liên quan</h2>
+    </div>
+
+    {% for product in related_products %}
+    <div class="row">
+        <div class="col-md-6 col-lg-3">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <a href="#" class="product-img">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </a>
+                </div>
+        
+                <div class="product-body">
+                    <h3 class="product-name">{{ product.name }}</h3>
+                    <p class="product-price">{{ product.price|intcomma }} vnđ</p>
+                    <button class="btn-full-primary">Thêm vào giỏ hàng</button>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section> -->
+{% endblock %}
