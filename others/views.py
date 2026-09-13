@@ -10,8 +10,8 @@ def home(request, category_slug='ban-phim'):
 
     featured_products = Product.objects.filter(category__slug=category_slug, is_featured=True)[:4]
     
-    if not featured_products:
-        featured_products = Product.objects.filter(category__slug='ban-phim', is_featured=True)[:4]
+    # if not featured_products:
+    #     featured_products = Product.objects.filter(category__slug='ban-phim', is_featured=True)[:4]
     
     context = {
         'current_slug': category_slug,
