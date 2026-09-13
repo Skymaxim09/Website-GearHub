@@ -13,7 +13,7 @@ CATEGORY_MAP = {
         'model': Keycap,
         'filter_fields': ['profile', 'material', 'print_tech']
     },
-    'chut': {
+    'chut-may-tinh': {
         'model': Mouse,
         'filter_fields': ['connection', 'brand', 'mouse_type']
     },

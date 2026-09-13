@@ -24,7 +24,7 @@ main.container {
 
 .section-white {
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 16px;
     background-color: white;
 }
 
@@ -40,6 +40,12 @@ main.container {
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     padding: 60px 0;
+}
+
+.product-detail-wrapper {
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin: 30px 0;
 }
 
 @media (max-width:480px) {

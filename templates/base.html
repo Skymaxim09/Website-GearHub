@@ -19,12 +19,12 @@
     <header class="navbar navbar-expand-lg navbar-gearhub py-3">
         <div class="container">
 
-            <a href="#" class="navbar-brand d-flex align-items-center">
+            <a href="{% url 'home' 'ban-phim' %}" class="navbar-brand d-flex align-items-center">
                 <img src="{% static 'image/Logo.png' %}" alt="Logo" class="logo">
                 <span class="logo-name">GearHub</span>
             </a>
 
-            <form action="" class="search-box me-auto ms-2" method="get">
+            <form action="{% url 'search_box' %}" class="search-box me-auto ms-2" method="get">
                 {% csrf_token %}
                 <input type="text" class="form-control form-control-sm" name="q" placeholder="Nhập tên sản phẩm..."
                     value="{{ request.GET.q|default:'' }}">
@@ -47,7 +47,7 @@
                         <ul class="dropdown-menu shadow">
                             {% for cate in categories %}
                             <li>
-                                <a class="nav-link-dropdown dropdown-item" href="#">
+                                <a class="nav-link-dropdown dropdown-item" href="{% url 'product_list' cate.slug %}">
                                     {{ cate.name }}
                                 </a>
                             </li>
@@ -56,7 +56,7 @@
                             {% endfor %}
                         </ul>
                     </li>
-                    <li class="nav-item me-3"><a class="nav-link" href="#">Tin tức</a></li>
+                    <li class="nav-item me-3"><a class="nav-link" href="{% url 'post_list' %}">Tin tức</a></li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             Giỏ hàng
@@ -72,7 +72,7 @@
                 </ul>
             </div>
             
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center" id="userAuth">
                 {% if user.is_authenticated %}
                 <div class="user-menu mx-3">
                     <a href="#">
@@ -83,7 +83,7 @@
 
                 <form action="" class="d-inline" method="post">
                     {% csrf_token %}
-                    <button type="submit" class="btn-logout">Đăng xuất</button>
+                    <button type="submit" class="btn btn-logout">Đăng xuất</button>
                 </form>
                 {% else %}
                 <a href="#" class="btn btn-light me-2">Đăng nhập</a>
@@ -110,9 +110,9 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
-        <p>&copy; 2026 GearHub - Chuyên hỗ trợ về phụ kiện máy tính. Designed by Skymaxim and TuanTu</p>
-        <a href="#" class="btn btn-light">Liên hệ với chúng tôi</a>
+    <footer class="gap-3">
+        <p class="me-5">&copy; 2026 GearHub - Chuyên hỗ trợ về phụ kiện máy tính. Designed by Skymaxim and TuanTu</p>
+        <a href="{% url 'contact' %}" class="btn btn-light">Liên hệ với chúng tôi</a>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

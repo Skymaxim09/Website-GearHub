@@ -1,0 +1,80 @@
+.product-status-badge {
+    position:  absolute;
+    top: 12px;
+    right: 12px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #fff;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0,0,0, 0.15);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-status-badge {
+    transform: scale(1.05);
+}
+
+.product-status-badge i {
+    font-size: 0.85rem;
+}
+
+.product-status-badge.status-in_stock {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 50%, #58d68d 100%);
+    box-shadow: 0 4px 14px rgba(39, 174, 96, 0.45);
+}
+
+.product-status-badge.status-warning_stock {
+    background: linear-gradient(135deg, #eab308 0%, #f59e0b 50%, #fbbf24 100%);
+    box-shadow: 0 4px 14px rgba(234, 179, 8, 0.45);
+}
+
+.product-status-badge.status-out_of_stock {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.45);
+}
+
+.product-status-badge.status-discontinued {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 50%, #374151 100%);
+    box-shadow: 0 4px 14px rgba(107, 114, 128, 0.45);
+}
+
+.product-status-badge::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-right: 5px;
+    display: inline-block;
+    font-size: 0.85rem;
+}
+
+.status-in_stock::before {
+    content: "\f058";
+}
+
+.status-warning_stock::before {
+    content: "\f071";
+}
+
+.status-out_of_stock::before {
+    content: "\f057";
+}
+
+.status-discontinued::before {
+    content: "\f05e";
+}
+
+.product-meta .product-status::before {
+    font-family: "Font Awesome 6 Free";
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 900;
+    margin-right: 5px;
+}
