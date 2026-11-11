@@ -19,6 +19,7 @@ pip install -r requirements.txt
 - Chạy lệnh migrate để khởi tạo database:
 ```bash
 python manage.py migrate
+python manage.py loaddata data.json
 ```
 - Khởi chạy website:
 ```bash

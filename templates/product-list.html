@@ -80,7 +80,7 @@
                         {{ product.get_status_display }}
                     </span>
                     
-                    <a href="#" class="product-img">
+                    <a href="{% url 'product_detail' product.category.slug product.id %}" class="product-img">
                         <img src="{{ product.image.url }}" alt="{{ product.name }}">
                     </a>
                 </div>
